@@ -33,9 +33,9 @@
             <div class="absolute inset-0">
                 <img src="https://axoncomunicacion.net/wp-content/uploads/2024/07/2149100197.jpg"
                      alt="Veterinario y mascota feliz"
-                     class="w-full h-full object-cover brightness-50 grayscale">
-                <!-- Degradado lateral -->
-                <div class="absolute inset-0 bg-gradient-to-l from-black via-black/80 to-transparent"></div>
+                     class="w-full h-full object-cover brightness-75">
+                <!-- Degradado lateral menos oscuro -->
+                <div class="absolute inset-0 bg-gradient-to-l from-black/60 via-black/30 to-transparent"></div>
             </div>
         
             <!-- Contenido -->
@@ -58,6 +58,7 @@
                 </div>
             </div>
         </section>
+        
 
         <!-- Servicios -->
         <section class="py-20 bg-gray-100">
@@ -88,7 +89,7 @@
             <div class="max-w-7xl mx-auto px-4 text-center">
                 <h2 class="text-3xl font-bold text-gray-900 mb-6">Nuestros pacientes felices 🐶</h2>
                 <div id="dog-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
-                <button id="load-dogs" class="mt-6 px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition">Ver más perritos</button>
+                <button id="load-dogs" class="mt-6 px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition">Ver más</button>
             </div>
         </section>
     
