@@ -36,6 +36,7 @@ class HistoryController extends Controller
         $history = new History();
         $history->pet_id = $request->pet_id;
         $history->diagnostico = $request->diagnostico;
+        $history->tratamiento = $request->tratamiento;
         $history->descripcion = $request->descripcion;
         $history->fecha = $request->fecha;
         $history->vet_id = Auth::id();

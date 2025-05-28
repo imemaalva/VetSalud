@@ -50,11 +50,7 @@
                     <a href="{{ route('login') }}"
                        class="bg-white text-black px-6 py-3 rounded-lg font-semibold hover:bg-gray-200 transition">
                         Iniciar Sesión
-                    </a>
-                    <a href="{{ route('register') }}"
-                       class="bg-black border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white hover:text-black transition">
-                        Registrarse
-                    </a>
+                </a>
                 </div>
             </div>
         </section>
@@ -89,7 +85,7 @@
             <div class="max-w-7xl mx-auto px-4 text-center">
                 <h2 class="text-3xl font-bold text-gray-900 mb-6">Nuestros pacientes felices 🐶</h2>
                 <div id="dog-gallery" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6"></div>
-                <button id="load-dogs" class="mt-6 px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition">Ver más</button>
+                {{-- <button id="load-dogs" class="mt-6 px-6 py-2 bg-black text-white rounded-lg hover:bg-gray-800 transition">Ver más</button> --}}
             </div>
         </section>
     
@@ -103,25 +99,45 @@
     
         <!-- Script perritos -->
         <script>
+            let cargando = false;
             async function cargarPerritos(cantidad = 3) {
-                const contenedor = document.getElementById('dog-gallery');
-                try {
-                    const respuesta = await fetch(`https://dog.ceo/api/breeds/image/random/${cantidad}`);
-                    const datos = await respuesta.json();
-                    datos.message.forEach(url => {
-                        const img = document.createElement('img');
-                        img.src = url;
-                        img.alt = "Perrito adorable";
-                        img.className = "w-full h-64 object-cover rounded-lg shadow-md";
-                        contenedor.appendChild(img);
-                    });
-                } catch (error) {
-                    console.error('Error al cargar las imágenes:', error);
-                }
-            }
-    
-            document.getElementById('load-dogs').addEventListener('click', () => cargarPerritos(3));
-            window.addEventListener('DOMContentLoaded', () => cargarPerritos(3));
+    if (cargando) return;
+    cargando = true;
+
+    const contenedor = document.getElementById('dog-gallery');
+    try {
+      const respuesta = await fetch(`https://dog.ceo/api/breeds/image/random/${cantidad}`);
+      const datos = await respuesta.json();
+      datos.message.forEach(url => {
+        const div = document.createElement('div');
+        div.className = "flex flex-col items-center";
+
+        const img = document.createElement('img');
+        img.src = url;
+        img.alt = "Perrito adorable";
+        img.className = "w-full h-64 object-cover rounded-lg shadow-md";
+
+       
+
+        div.appendChild(img);
+        contenedor.appendChild(div);
+      });
+    } catch (error) {
+      console.error('Error al cargar las imágenes:', error);
+    } finally {
+      cargando = false;
+    }
+  }
+
+  // Scroll infinito
+  window.addEventListener('scroll', () => {
+    if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+      cargarPerritos(3);
+    }
+  });
+
+  // Cargar imágenes al iniciar
+  window.addEventListener('DOMContentLoaded', () => cargarPerritos(3));
         </script>
     
         @if (Route::has('login'))

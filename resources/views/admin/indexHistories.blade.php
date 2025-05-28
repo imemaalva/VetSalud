@@ -45,7 +45,7 @@
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                             <option value="">Seleccione la mascota</option>
                             @foreach ($pets as $pet)
-                                <option value="{{ $pet->_id }}">{{ $pet->nombre }} (Dueño: {{$pet->owner->nombre}})</option>
+                                <option value="{{ $pet->_id }}">{{ $pet->nombre }} (Dueño: {{$pet->owner->nombre ?? 'Sin dueño'}})</option>
                             @endforeach
                         </select>
                         <div class="mt-2">
@@ -80,7 +80,7 @@
     <div class="px-24 flex flex-wrap">
         @foreach ($histories as $history)
             <div
-                class="max-w-sm  bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                class="w-96 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-5">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         Mascota tratada: {{ $history->pet->nombre ?? 'Sin asignar' }}</h5>

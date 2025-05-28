@@ -47,7 +47,7 @@
                         </div>
                         <div class="mt-2">
                             <label for="telefono" class="text-sm text-gray-500">Teléfono</label>
-                            <input id="telefono" name="telefono" type="tel"  minlength="10" placeholder="123-456-7890"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="El teléfono debe de tener 10 dígitos" required
+                            <input id="telefono" name="telefono" type="tel"  minlength="10" oninput="formatearTelefono(this)" placeholder="123-456-7890"  pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" title="El teléfono debe de tener 10 dígitos" required
                                 class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm sm:w-full sm:border-t-0 sm:border-b-2 sm:border-indigo-300">
                         </div>
                         <div class="mt-2">
@@ -71,7 +71,7 @@
     <div class="px-24 flex flex-wrap">
         @foreach ($duenos as $dueno)
             <div
-                class="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
+                class="w-96 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700">
                 <div class="p-5">
                     <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
                         {{ $dueno->nombre }}</h5>
@@ -103,3 +103,19 @@
 
     </div>
 </x-app-layout>
+<script>
+    function formatearTelefono(input) {
+        let valor = input.value.replace(/\D/g, '').substring(0, 10); // Solo números, máx 10 dígitos
+        const parte1 = valor.substring(0, 3);
+        const parte2 = valor.substring(3, 6);
+        const parte3 = valor.substring(6, 10);
+
+        if (valor.length > 6) {
+            input.value = `${parte1}-${parte2}-${parte3}`;
+        } else if (valor.length > 3) {
+            input.value = `${parte1}-${parte2}`;
+        } else {
+            input.value = parte1;
+        }
+    }
+</script>
